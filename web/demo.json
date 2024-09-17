@@ -1,0 +1,105 @@
+{
+    "Approach A" : {
+        "firstStageInput" : {
+            "name": "Input",
+
+            "text" : "The input image, where everything begins.",
+
+            "selector" : {
+                "input" : "Input"
+            }
+        },
+
+        "cielab" : {
+            "name" : "CIELAB",
+
+            "text" : "The first, and perhaps most important step, is the conversion of the input BGR image to CIELAB.\n This seperates the chromatic and luminant information in a perceptually-consistent and well-defined manner, allowing us to easily process the resultant channels.\n",
+            
+            "inline" : false,
+
+            "selector" : {
+                "input" : "Input",
+                "lab_l" : "L* channel. Perceptual Lightness (The values should correspond with how \"bright\" or \"light\" you perceive pixels in the original image.)",
+                "lab_a" : "a* channel. Lower values are more green, Higher values are more Red.",
+                "lab_b" : "b* channel. Lower values are more blue, Higher values are more yellow."
+            }
+        },
+
+        "truedist" : {
+            "name" : "True Distance",
+
+            "text" : "The CIELAB image is further refined into two channels.\n A \"Color Distance\" Channel is defined as the euclidean distance of the (a*,b*) coordinate from (0,0), or intuitively, how \"colorful\" the pixel is.\n A \"Luminant Distance\" Channel is defined as the difference of the L* component from a defined whitepoint (~0.66 in this program).\n These two components are added together, with the \"Luminant Distance\" Channel clipped to the 0 to 1 range, to form the \"True Distance\" result.\n",
+            
+            "selector" : {
+                "input" : "Input",
+                "colorDist" : "Color distance",
+                "lumDist" : "Luminant Distance",
+                "trueDist" : "True Distance"
+            }
+        },
+        
+        "rects" : {
+            "name" : "Colorful Rectangles",
+
+            "text" : "This True Distance is then blurred, transformed with the Canny Edge detector, and dilated with a 3x3 kernel. Finally, it is passed to the opencv findContours function, and the external contours - the bricks, are extracted.\n\n The color classification is simple in comparison, finding the dominant (amplitude in histogram) color in each contour and assigning the closest reference color point.\n However, this doesn't work for bricks with no or small chroma value, like grey bricks. Thus, an additional layer is used for bricks whose dominant chroma is closest to (0,0), and a classification by the dominant L* value is done instead.\n",
+
+            "selector" : {
+                "canned" : "Blur + Canny + Dilation",
+                "contours" : "Contours",
+                "output" : "Output"
+            }
+        },
+
+        "cld" : {
+            "name" : "The Lord of the Rings",
+
+            "text" : "This is the hardest and most complex section, finetuned from multiple lesser iterations to achieve maximum recall and precision. The goal of this section is to maximise contrast and refine as many \"rings\" as possible from the stud circles in the bricks.\n\n The first step is similar to \"Luminant Distance\" in the \"True Distance\" stage, though slightly different. This then goes through three stages of processing: CLAHE, Laplacian, and Dilate.\n\n CLAHE is a localised histogram equalisation, maximising local contrast to make detection more reliable. \n The second stage is the Laplacian, finding the magnitude of the local gradient like the derivative. This acts similarly to Canny's Edge detector, but does not comprise any additional processing that Canny's boasts. Instead, we perform a simple thresholding.\n The final stage - Dilate, simply dilates the previous stage, and is surprisingly effective at closing gaps due to low-contrast regions",
+
+            "selector" : {
+                "input": "Input",
+                "lumDist2" : "Luminant Distance 2",
+                "clahe" : "CLAHE",
+                "laplace" : "Laplacian",
+                "dilate" : "Dilate"
+            }
+        },
+
+        "mergeCircles" : {
+            "name" : "Why can't I hold all these Circles?",
+
+            "text" : "The results of the previous three stages go through distinct Hough transforms with their own unique coefficients, yielding multiple candidate circles per brick. However, this leads to many overlapping duplicates. Thus, the circles are merged using a naive image method, and this forms the final result after being fitted to the possible permutations.",
+
+            "selector" : {
+                "claheCircles" : "CLAHE",
+                "laplaceCircles" : "Laplacian",
+                "dilateCircles" : "Dilate",
+                "merge" : "Merge",
+                "circles" : "Circles"
+            }
+        },
+
+        "lastStageOutput" : {
+            "name" : "Output",
+
+            "text" : "The final predictions.",
+
+            "selector" : {
+                "output" : "Output"
+            }
+        }
+    },
+
+    "Approach B" : {
+        "yolo" : {
+            "name": "YOLO",
+
+            "text" : "As YOLOv5 is a neural network, intermediate parts of the algorithm will be completely incomprehensible, and thus useless to look at.\n However, we can still look at the results of the model.",
+
+            "selector" : {
+                "input" : "Input",
+                "predictions" : "All Predictions (Probability > 0.25)",
+                "output": "Output (Probability > 0.8)"
+            }
+        }
+    }
+}

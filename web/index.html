@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Wallace's Brick Detection; Assignment 1</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/eel.js"></script>
+    <script type="text/javascript" src="./index.js"></script>
+
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/fontawesome.min.css" integrity="sha512-kJ30H6g4NGhWopgdseRb8wTsyllFUYIx3hiUwmGAkgA9B/JbzUBDQVr2VVlWGde6sdBVOG7oU8AL35ORDuMm8g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/solid.min.css" integrity="sha512-SazV6tF6Ko4GxhyIZpKoXiKYndqzh7+cqxl9HDH7DGSpjkCN3QLqTAlhJHJnKxu3/2rfCsltzwFC4CmxZE1hPg==" crossorigin="anonymous" />
+
+</head>
+
+<body class="custom-bg-dark custom-scrollbar-dark">
+    <!-- HTML STARTS HERE -->
+
+    <!-- Type your codes here -->
+    <div class="container-sm|md|lg|xl p-4 m-3 custom-bg-dark-fg">
+        <h2 class="text-white" id="titleBoard">Brick Detector 9000</h2>
+    </div>
+
+    <!-- Demo Panel -->
+    <div class="container-sm|md|lg|xl m-3" id="infoPanel">
+        <div class="card custom-bg-dark-fg">
+            <div class="card-header position-relative custom-bg-dark-fg-hover">
+                <a class="card-link text-light" data-toggle="collapse" href="#demoPanel">
+                    Demonstration Mode Panel
+                    <span class="href-div-relative"></span>
+                </a>
+            </div>
+
+            <div id="demoPanel" class="collapse" data-parent="#infoPanel">
+                <!-- Nav tabs -->
+                <ul id="demoTabList" class="nav nav-tabs nav-justified custom-dark-nav-tabs custom-bg-dark">
+
+                    <!-- <li class="nav-item">
+                        <a class="nav-link text-light" data-toggle="tab" href="#home">Input</a>
+                    </li> -->
+
+                </ul>
+
+                <!-- Tab panes -->
+                <div id="demoContentPanel" class="tab-content my-3">
+
+                    <!-- <div class="tab-pane container fade" id="home">
+                        <p class="text-white">Placeholder1</p>
+                        
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="customRadio" name="example" value="customEx">
+                            <label class="custom-control-label text-white" for="customRadio">Custom radio 1</label>
+                          </div>
+                          <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="customRadio2" name="example" value="customEx">
+                            <label class="custom-control-label text-white" for="customRadio2">Custom radio 2</label>
+                        </div>
+
+                    </div> -->
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Section -->
+    <div class="container-sm|md|lg|xl px-3 my-3">
+        <div class="row">
+
+            <!-- Video List -->
+            <div style="width: 224px;">
+                <ul class="list-group custom-scrollbar-dark" style="height: 70vh; overflow-y: auto;">
+                    <div id="leftCollapseGroup">
+
+                        <!-- Header -->
+                        <div class="card custom-bg-dark-fg">
+                            <div class="card-header">
+                                <h5 class="my-auto text-white">Video List</h5>
+                            </div>
+                        </div>
+
+                        <!-- Level 1 -->
+                        <div class="card custom-bg-dark-fg">
+                            <div class="card-header custom-bg-dark-fg-hover position-relative">
+                                <a class="card-link text-white" data-toggle="collapse" href="#level1Collapse">
+                                    Level 1
+                                    <span class="href-div-relative"></span>
+                                </a>
+                            </div>
+
+                            <div id="level1Collapse" class="collapse" data-parent="#leftCollapseGroup">     
+
+                            <!-- <li class="list-group-item custom-text-ash custom-bg-dark-fg" >
+                                Test
+                            </li> -->
+
+                            </div>
+                        </div>
+
+                        <!-- Level 2 -->
+                        <div class="card custom-bg-dark-fg">
+                            <div class="card-header custom-bg-dark-fg-hover position-relative">
+                                <a class="card-link text-white" data-toggle="collapse" href="#level2Collapse">
+                                Level 2
+                                <span class="href-div-relative"></span>
+                                </a>
+                            </div>
+    
+                            <div id="level2Collapse" class="collapse" data-parent="#leftCollapseGroup">     
+    
+                                <!-- Empty -->
+    
+                            </div>
+                        </div>
+                    
+                        <!-- Level 3 -->
+                        <div class="card custom-bg-dark-fg">
+                            <div class="card-header custom-bg-dark-fg-hover position-relative">
+                                <a class="card-link text-white" data-toggle="collapse" href="#level3Collapse">
+                                Level 3
+                                <span class="href-div-relative"></span>
+                                </a>
+                            </div>
+    
+                            <div id="level3Collapse" class="collapse" data-parent="#leftCollapseGroup">     
+    
+                                <!-- Empty -->
+    
+                            </div>
+                        </div>
+                    
+                    </div>
+                </ul>
+            </div>
+
+            <!-- Video Player -->
+            <div class="col-md-6 mx-3">
+                <div class="row">
+                    <h6 class="text-light" id="videoPlayerTitle">[No Video Playing]</h6>
+                </div>
+
+                <div class="row">
+                    <img id="videoPlayerOutput" src="" class="scale-to-viewport no-select" onclick="eel.toggle_video_feed()" draggable="false" style="cursor: pointer;">
+                </div>
+
+                <div class="row mb-3 custom-bg-dark-fg align-items-center">
+                    <div class="col-auto py-2">
+                        <button onclick="eel.toggle_video_feed()" id="btn1" type="button" class="btn btn-dark custom-bg-dark-fg-hover py-1 px-3">
+                            <i id="playButton" class="fas fa-play"></i>
+                        </button>
+                    </div>
+        
+                    <div class="col">
+                        <input onmousedown="seek(true)" onmouseup="seek(false)" type="range" class="custom-seek-bar-style my-2" id="seek-bar" value="0" max=100>
+                    </div>
+        
+                    <div class="col-auto">
+                        <p class="text-white my-2 no-select" id="elapsed" data-toggle="tooltip" data-placement="top" title="">00:00</p>
+                    </div>
+                </div>
+
+                <!-- <div class="row mb-3">
+                    <button onclick="" id="btn1" type="button" class="btn btn-dark">Skip to next brick group</button>
+                </div> -->
+            </div>
+
+            <!-- Count board -->
+            <div class="col pl-0">
+                <!-- Header -->
+                <div class="card custom-bg-dark-fg">
+                    <div class="card-header">
+                        <h5 class="my-auto text-white">Detection List</h5>
+                    </div>
+                </div>
+
+                <ul class="list-group" id="categoryList">
+                    <!-- <li class="list-group-item d-flex justify-content-between custom-bg-dark-fg no-select p-2">
+                        <div class="my-auto" style="background-color: coral; width: 6vh; height: 4vh;">
+                            <h2 class="text-white" style="line-height: 4vh;text-align: center; text-shadow: 0px 0px 6px black;">2x4</h2>
+                        </div>
+
+                        <h1 class="my-auto"> 
+                            <span class="badge badge-dark">4</span>
+                        </h1>
+                    </li> -->
+                </ul>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Loading bar -->
+    <div class="container-sm|md|lg|xl fixed-bottom" id="loadingBar">
+        <div class="col-md-6 p-3 ml-3 my-3 custom-bg-dark-fg">
+            <div class="align-middle d-flex flex-row">
+                <h5 class="text-light flex-fill no-select" id="loadingText">
+                    Loading : www.mp4
+                </h5>
+                <span class="spinner-border text-light"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- HTML ENDS HERE -->
+
+</body>
+
+</html>
