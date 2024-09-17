@@ -12,3 +12,5 @@ Monitor device temperature.
 
 
 All Sample Videos (as well as test videos) included.
+
+Video credits to my lecturer in Ngee Ann Polytechnic.
